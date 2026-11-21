@@ -11,10 +11,13 @@ import {
 } from "lucide-react";
 
 const getBackendUrl = () => {
-  if (process.env.NEXT_PUBLIC_BACKEND_URL) {
+  if (process.env.NEXT_PUBLIC_BACKEND_URL && !process.env.NEXT_PUBLIC_BACKEND_URL.startsWith("friends-app-backend")) {
     return process.env.NEXT_PUBLIC_BACKEND_URL;
   }
   if (typeof window !== "undefined") {
+    if (window.location.hostname.endsWith(".onrender.com")) {
+      return "https://friends-app-backend.onrender.com";
+    }
     return `${window.location.protocol}//${window.location.hostname}:4000`;
   }
   return "http://localhost:4000";

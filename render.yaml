@@ -22,8 +22,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: NEXT_PUBLIC_BACKEND_URL
-        fromService:
-          type: web
-          name: friends-app-backend
-          property: host
