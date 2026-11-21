@@ -11,6 +11,9 @@ import {
 } from "lucide-react";
 
 const getBackendUrl = () => {
+  if (process.env.NEXT_PUBLIC_BACKEND_URL) {
+    return process.env.NEXT_PUBLIC_BACKEND_URL;
+  }
   if (typeof window !== "undefined") {
     return `${window.location.protocol}//${window.location.hostname}:4000`;
   }

@@ -1,0 +1,29 @@
+services:
+  # 1. Real-time Node.js + WebSockets Signaling Backend
+  - type: web
+    name: friends-app-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # 2. Next.js 15 Frontend Web App
+  - type: web
+    name: friends-app-web
+    runtime: node
+    plan: free
+    rootDir: web
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_BACKEND_URL
+        fromService:
+          type: web
+          name: friends-app-backend
+          property: host
