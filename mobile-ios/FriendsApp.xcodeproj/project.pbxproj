@@ -1,0 +1,207 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* FriendsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* FriendsAppApp.swift */; };
+		A10002 /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* MainContentView.swift */; };
+		A10003 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* MatchView.swift */; };
+		A10004 /* ActiveCallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* ActiveCallView.swift */; };
+		A10005 /* CelebrityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* CelebrityView.swift */; };
+		A10006 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006 /* EventsView.swift */; };
+		A10007 /* SupportDeskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007 /* SupportDeskView.swift */; };
+		A10008 /* WebRTCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008 /* WebRTCManager.swift */; };
+		A10009 /* CallKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009 /* CallKitManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10000 /* FriendsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10001 /* FriendsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAppApp.swift; sourceTree = "<group>"; };
+		B10002 /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		B10003 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		B10004 /* ActiveCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCallView.swift; sourceTree = "<group>"; };
+		B10005 /* CelebrityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityView.swift; sourceTree = "<group>"; };
+		B10006 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		B10007 /* SupportDeskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDeskView.swift; sourceTree = "<group>"; };
+		B10008 /* WebRTCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCManager.swift; sourceTree = "<group>"; };
+		B10009 /* CallKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallKitManager.swift; sourceTree = "<group>"; };
+		B10010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		C10001 = {
+			isa = PBXGroup;
+			children = (
+				C10002 /* FriendsApp */,
+				B10000 /* FriendsApp.app */,
+			);
+			sourceTree = "<group>";
+		};
+		C10002 /* FriendsApp */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* FriendsAppApp.swift */,
+				B10002 /* MainContentView.swift */,
+				B10003 /* MatchView.swift */,
+				B10004 /* ActiveCallView.swift */,
+				B10005 /* CelebrityView.swift */,
+				B10006 /* EventsView.swift */,
+				B10007 /* SupportDeskView.swift */,
+				B10008 /* WebRTCManager.swift */,
+				B10009 /* CallKitManager.swift */,
+				B10010 /* Info.plist */,
+			);
+			path = FriendsApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D10001 /* FriendsApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E10001 /* Build configuration list for PBXNativeTarget "FriendsApp" */;
+			buildPhases = (
+				F10001 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FriendsApp;
+			productName = FriendsApp;
+			productReference = B10000 /* FriendsApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 000002 /* Build configuration list for PBXProject "FriendsApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C10001;
+			productRefGroup = C10001;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D10001 /* FriendsApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* FriendsAppApp.swift in Sources */,
+				A10002 /* MainContentView.swift in Sources */,
+				A10003 /* MatchView.swift in Sources */,
+				A10004 /* ActiveCallView.swift in Sources */,
+				A10005 /* CelebrityView.swift in Sources */,
+				A10006 /* EventsView.swift in Sources */,
+				A10007 /* SupportDeskView.swift in Sources */,
+				A10008 /* WebRTCManager.swift in Sources */,
+				A10009 /* CallKitManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E10002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FriendsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.friendsapp.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E10003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FriendsApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.friendsapp.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E10001 /* Build configuration list for PBXNativeTarget "FriendsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E10002 /* Debug */,
+				E10003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000002 /* Build configuration list for PBXProject "FriendsApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000003 /* Debug */,
+				000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 000001 /* Project object */;
+}

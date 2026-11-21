@@ -1,0 +1,208 @@
+// Prisma Schema for Friends App (PostgreSQL + PostGIS)
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+enum Role {
+  USER
+  ORGANIZATION
+  CELEBRITY
+  SUPPORT
+  SUPER_ADMIN
+}
+
+enum CallType {
+  RANDOM_FRIEND
+  CELEBRITY_CALL
+  SUPPORT_CALL
+}
+
+enum MediaType {
+  AUDIO
+  VIDEO
+}
+
+enum CallStatus {
+  INITIATED
+  CONNECTED
+  COMPLETED
+  MISSED
+  REJECTED
+  TERMINATED_INSUFFICIENT_COINS
+}
+
+enum Availability {
+  ONLINE
+  BUSY
+  OFFLINE
+  DO_NOT_DISTURB
+}
+
+enum TicketStatus {
+  CONFIRMED
+  CHECKED_IN
+  CANCELLED
+  REFUNDED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id               String               @id @default(uuid())
+  phone            String               @unique
+  name             String
+  role             Role                 @default(USER)
+  avatarUrl        String?
+  latitude         Float?
+  longitude        Float?
+  isVerified       Boolean              @default(false)
+  isBanned         Boolean              @default(false)
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  wallet           Wallet?
+  celebrityProfile CelebrityProfile?
+  orgProfile       OrganizationProfile?
+
+  outgoingCalls    CallSession[]        @relation("CallerRelation")
+  incomingCalls    CallSession[]        @relation("ReceiverRelation")
+  ticketBookings   TicketBooking[]
+  supportTickets   SupportTicket[]      @relation("UserTickets")
+  assignedTickets  SupportTicket[]      @relation("AgentTickets")
+}
+
+model CelebrityProfile {
+  id                   String       @id @default(uuid())
+  userId               String       @unique
+  user                 User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio                  String
+  category             String       @default("Actor")
+  audioRatePerMinCoins Int          @default(30)
+  videoRatePerMinCoins Int          @default(60)
+  availability         Availability @default(ONLINE)
+  rating               Float        @default(4.9)
+  totalEarnedCoins     Int          @default(0)
+  createdAt            DateTime     @default(now())
+}
+
+model OrganizationProfile {
+  id             String    @id @default(uuid())
+  userId         String    @unique
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName    String
+  regNumber      String?
+  isApproved     Boolean   @default(false)
+  events         Event[]
+  createdAt      DateTime  @default(now())
+}
+
+model Event {
+  id           String             @id @default(uuid())
+  organizerId  String
+  organizer    OrganizationProfile @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  title        String
+  description  String
+  venueName    String
+  latitude     Float
+  longitude    Float
+  bannerUrl    String
+  startTime    DateTime
+  endTime      DateTime
+  isPublished  Boolean            @default(true)
+  ticketTiers  TicketTier[]
+  createdAt    DateTime           @default(now())
+}
+
+model TicketTier {
+  id            String          @id @default(uuid())
+  eventId       String
+  event         Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name          String          // "General", "VIP", "Backstage"
+  priceInr      Decimal         @db.Decimal(10, 2)
+  totalQuantity Int
+  soldQuantity  Int             @default(0)
+  bookings      TicketBooking[]
+}
+
+model TicketBooking {
+  id               String       @id @default(uuid())
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  ticketTierId     String
+  ticketTier       TicketTier   @relation(fields: [ticketTierId], references: [id])
+  quantity         Int          @default(1)
+  totalAmountInr   Decimal      @db.Decimal(10, 2)
+  paymentGateway   String       // "RAZORPAY", "STRIPE"
+  paymentIntentId  String
+  qrToken          String       @unique
+  status           TicketStatus @default(CONFIRMED)
+  bookedAt         DateTime     @default(now())
+}
+
+model Wallet {
+  id           String              @id @default(uuid())
+  userId       String              @unique
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  coinBalance  Int                 @default(100) // Starting bonus
+  transactions WalletTransaction[]
+  updatedAt    DateTime            @updatedAt
+}
+
+model WalletTransaction {
+  id          String   @id @default(uuid())
+  walletId    String
+  wallet      Wallet   @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  coins       Int      // Positive for credit/recharge, negative for call deduction
+  type        String   // "RECHARGE", "CALL_DEDUCTION", "CELEB_EARNING", "REFUND"
+  referenceId String?  // CallSession ID or Payment ID
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model CallSession {
+  id              String     @id @default(uuid())
+  callerId        String
+  caller          User       @relation("CallerRelation", fields: [callerId], references: [id])
+  receiverId      String
+  receiver        User       @relation("ReceiverRelation", fields: [receiverId], references: [id])
+  callType        CallType
+  mediaType       MediaType  @default(AUDIO)
+  durationSeconds Int        @default(0)
+  coinsCharged    Int        @default(0)
+  status          CallStatus @default(INITIATED)
+  startedAt       DateTime   @default(now())
+  endedAt         DateTime?
+}
+
+model SupportTicket {
+  id              String              @id @default(uuid())
+  userId          String
+  user            User                @relation("UserTickets", fields: [userId], references: [id])
+  assignedAgentId String?
+  assignedAgent   User?               @relation("AgentTickets", fields: [assignedAgentId], references: [id])
+  subject         String
+  description     String
+  priority        TicketPriority      @default(MEDIUM)
+  status          SupportTicketStatus @default(OPEN)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
